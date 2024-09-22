@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #241616;
+        }
+        .chat-container {
+            max-width: 800px;
+            margin: 150px auto; 
+            padding: 20px;
+            background-color: #121212;
+            border-radius: 8px;
+            box-shadow: 0 0 2px gray;
+        }
+        .messages {
+            height: 500px;
+            overflow-y: auto;
+            border: 1px solid gray;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background-color: #121212;
+            color: white;
+        }
+        .input-box {
+            display: flex;
+        }
+        .input-box input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #471d1d;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+            background-color: #1e1e1e; 
+            color: white; 
+            font-size: 25px;
+        }
+        .input-box button {
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            font-size: 25px;
+        }
+        .input-box button:hover {
+            background-color: #0056b3;
+        }
+        .message {
+            margin-bottom: 5px;
+        }
+        .user-message {
+            color: #007bff; 
+            text-align: right; 
+            font-size: 30px;
+        }
+        .bot-message {
+            color: #28a745; 
+            text-align: left; 
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="messages" id="messages">
+            <!-- chat messages will appear here -->
+        </div>
+        <div class="input-box">
+            <input type="text" id="user-input" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+    <script>
+        async function sendMessage() {
+            const userInput = document.getElementById('user-input').value;
+            if (!userInput) return;
+
+            // display user message
+            const messagesDiv = document.getElementById('messages');
+            const userMessage = document.createElement('div');
+            userMessage.className = 'message user-message';
+            userMessage.textContent = 'You: ' + userInput;
+            messagesDiv.appendChild(userMessage);
+
+            // clear input box
+            document.getElementById('user-input').value = '';
+
+            // prepare to display bot response
+            const botMessage = document.createElement('div');
+            botMessage.className = 'message bot-message';
+            botMessage.innerHTML = 'ChatBot: '; 
+            messagesDiv.appendChild(botMessage);
+
+            // scroll to bottom
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+            // send request to backend
+            try {
+                const response = await fetch('/chatbot', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ query: userInput }),
+                });
+
+                // read response stream and update bot message
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+                let result = '';
+
+                while (true) {
+                    const { value, done } = await reader.read();
+                    if (done) break;
+
+                    result += decoder.decode(value);
+                    botMessage.innerHTML = 'ChatBot: ' + result; 
+
+                    // scroll to bottom
+                    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                botMessage.textContent = 'ChatBot: [Error occurred]'; 
+            }
+        }
+    </script>
+</body>
+</html>

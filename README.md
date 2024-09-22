@@ -2,7 +2,7 @@
 
 ## Features
 - To run the server, use gunicorn with the command: `gunicorn -b 0.0.0.0:8000 app:app`
-- Loads environment variables from a .env file, allowing for secure handling of sensitive information (like API tokens).
+- Loads environment variables from a .env file, you can obtain one from here: `https://huggingface.co/settings/tokens`
 - Utilizes the HuggingFaceEndpoint from LangChain to interact with the Falcon model (tiiuae/falcon-7b-instruct) for generating responses.
 - Sets up a web server using the Falcon framework to handle incoming HTTP requests.
 - The chatbot simulates real-time writing effects, enhancing user engagement by displaying responses as if they are being typed out.

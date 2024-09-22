@@ -1,4 +1,4 @@
-# ChatBot using LangChain and HuggingFace in Python
+# ChatBot using LangChain, HuggingFace & Falcon in Python
 
 ## Features
 - To run the server, use gunicorn with the command: `gunicorn -b 0.0.0.0:8000 app:app`

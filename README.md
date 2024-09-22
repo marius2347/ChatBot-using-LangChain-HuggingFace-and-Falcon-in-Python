@@ -1,4 +1,4 @@
-# ChatBot using LangChain, HuggingFace & Falcon in Python
+# ChatBot using LangChain, HuggingFace and Falcon in Python
 
 ## Features
 - To run the server, use gunicorn with the command: `gunicorn -b 0.0.0.0:8000 app:app`
@@ -12,7 +12,7 @@
 ## Acknowledgments
 
 **Python3**: [http://bit.ly/python3-certifications](http://bit.ly/python3-certifications)  
-**LangChain**: [https://www.datacamp.com/completed/statement-of-accomplishment/course/813915691e025008dddb4df55113ed906b57d93a](https://www.datacamp.com/completed/statement-of-accomplishment/course/813915691e025008dddb4df55113ed906b57d93a)
+**LangChain**: [https://bit.ly/langchain-certification](https://bit.ly/langchain-certification)
 <br>
 
 
@@ -20,7 +20,7 @@
 
 Here is a GIF demonstrating the key features of the application:
 
-![Demo Video](https://github.com/marius2347/Automatic-Speech-Recognition-using-Deep-Learning-in-Python/blob/main/video.gif)
+![Demo Video](https://github.com/marius2347/ChatBot-using-LangChain-and-HuggingFace-in-Python/blob/main/video.gif)
 
 > Note: The GIF may take some time to load due to its size.
 

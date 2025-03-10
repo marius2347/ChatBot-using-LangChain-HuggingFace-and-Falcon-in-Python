@@ -9,10 +9,6 @@
 - Returns plain text responses from the model, which can be easily displayed in the user interface.
 - While not directly implemented in app.py, the static HTML served can be designed to be mobile-responsive, making the chatbot accessible on various devices.
 
-## Acknowledgments
-
-**Python3**: [http://bit.ly/python3-certifications](http://bit.ly/python3-certifications)  
-**LangChain**: [https://bit.ly/langchain-certification](https://bit.ly/langchain-certification)
 <br>
 
 
